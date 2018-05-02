@@ -9,9 +9,8 @@ namespace WPFcalcProj
 
     public partial class MainWindow : Window
     {
-        double lastValue, newValue, result;
+        private double lastValue, newValue, result;
         private OpClicked opClicked;
-
 
         public MainWindow()
         {
@@ -42,9 +41,7 @@ namespace WPFcalcProj
                         result = CalcMath.Divide(lastValue, newValue);
                         break;
                 }
-
                 resultLabel.Content = result;
-
             }
         }
 
