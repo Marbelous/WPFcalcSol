@@ -1,4 +1,6 @@
-﻿namespace WPFcalcProj
+﻿using System.Windows;
+
+namespace WPFcalcProj
 {
     public class CalcMath
     {
@@ -22,12 +24,10 @@
             if (num2 != 0)
             {
                 return num1 / num2;
+            }
 
-            }
-            else
-            {
-                return double.NaN;
-            }
+            MessageBox.Show("Cannot divide by zero!", "Divide by Zero Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+            return 0;
         }
     }
 }

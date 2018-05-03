@@ -10,7 +10,8 @@ namespace WPFcalcProj
     public partial class MainWindow : Window
     {
         private double lastValue, newValue, result;
-        private OpClicked opClicked;
+        private OpClickedEnum opClickedEnum;
+        string opClicked;
 
         public MainWindow()
         {
@@ -20,6 +21,19 @@ namespace WPFcalcProj
             acButton.Click += AcButton_Click;
             negativeButton.Click += NegativeButton_Click;
             percentButton.Click += PercentButton_Click;
+            decimalButton.Click += DecimalButton_Click;
+        }
+
+        private void DecimalButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (resultLabel.Content.ToString().Contains("."))
+            {
+                // Ignore if it's another decimal point.
+            }
+            else
+            {
+                resultLabel.Content = $"{resultLabel.Content}.";
+            }
         }
 
         private void EqualsButton_Click(object sender, RoutedEventArgs e)
@@ -28,20 +42,23 @@ namespace WPFcalcProj
             {
                 switch (opClicked)
                 {
-                    case OpClicked.Add:
+                    case "+":
                         result = CalcMath.Add(lastValue, newValue);
                         break;
-                    case OpClicked.Subtract:
+                    case "-":
                         result = CalcMath.Subtract(lastValue, newValue);
                         break;
-                    case OpClicked.Multiply:
+                    case "*":
                         result = CalcMath.Multiply(lastValue, newValue);
                         break;
-                    case OpClicked.Divide:
+                    case "/":
                         result = CalcMath.Divide(lastValue, newValue);
                         break;
                 }
                 resultLabel.Content = result;
+
+                lastValue = 0f;
+                newValue = 0f;
             }
         }
 
@@ -88,18 +105,14 @@ namespace WPFcalcProj
         {
             if (double.TryParse(resultLabel.Content.ToString(), out lastValue))
             {
-                char opClicked;
-                
                 Button sourceButton = e.Source as Button;
-                char.TryParse(sourceButton.Content.ToString(), out opClicked);
+                opClicked = sourceButton.Content.ToString();
                 resultLabel.Content = "0";
-                resultLabel.Content = opClicked;
-                // sourceButton.Background = 
             }
         }
     }
 
-    public enum OpClicked
+    public enum OpClickedEnum
     {
         Add,
         Subtract,
