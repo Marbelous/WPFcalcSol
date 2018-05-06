@@ -19,7 +19,7 @@ namespace WPFcalcProj
 
             equalsButton.Click += EqualsButton_Click;
             acButton.Click += AcButton_Click;
-            negativeButton.Click += NegativeButton_Click;
+            negateButton.Click += NegateButton_Click;
             percentButton.Click += PercentButton_Click;
             decimalButton.Click += DecimalButton_Click;
         }
@@ -71,7 +71,7 @@ namespace WPFcalcProj
             }
         }
 
-        private void NegativeButton_Click(object sender, RoutedEventArgs e)
+        private void NegateButton_Click(object sender, RoutedEventArgs e)
         {
             if (double.TryParse(resultLabel.Content.ToString(), out lastValue) && resultLabel.Content.ToString() != "0")
             {
